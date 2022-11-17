@@ -21,19 +21,19 @@ const addUser = async (req, res) => {
 const findUsers = async (req, res) => {
   try {
     const users = await User.findAll();
-    res.json(users);
+    await res.json(users);
   } catch (err) {
-    res.send({ Error: err });
+    await res.send({ Error: err });
   }
 };
 
 const deleteUser = async (req, res) => {
   try {
-    const res = await User.destroy({
+    const response = await User.destroy({
       where: { id: req.params.id },
     });
 
-    res.json(res);
+    res.json(response);
   } catch (err) {
     res.send({ Error: err });
   }
@@ -42,7 +42,7 @@ const deleteUser = async (req, res) => {
 const updateUser = async (req, res) => {
   const body = req.body;
   try {
-    const res = await User.update(
+    const response = await User.update(
       {
         ...body,
       },
@@ -50,7 +50,7 @@ const updateUser = async (req, res) => {
         where: { ...req.params},
       }
     );
-    res.send(res);
+    res.send(response);
   } catch (err) {
     res.send({ "Error": err });
   }
@@ -62,3 +62,5 @@ module.exports = {
   deleteUser,
   updateUser,
 };
+
+

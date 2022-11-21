@@ -5,7 +5,7 @@ const { addUser, findUsers , deleteUser, updateUser } = require('../controllers/
 const router = express.Router();
 
 router.post("/add", addUser); // Create
-router.post("/get", findUsers); // Read
+router.get("/get", findUsers); // Read
 router.post("/update/:id", updateUser); // Update
 router.delete("/delete/:id", deleteUser); // Delete
 

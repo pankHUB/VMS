@@ -1,8 +1,9 @@
 const { DataTypes, Sequelize } = require('sequelize') ;
+const Voucher = require('./Voucher');
 
 const sequelize = require('../db/sequelize');
 
-module.exports = sequelize.define('user',{
+const User = sequelize.define('user',{
     id: {
         type: DataTypes.BIGINT,
         primaryKey: true,
@@ -31,7 +32,21 @@ module.exports = sequelize.define('user',{
         validate: {
             isInt: { args: true, msg: "You must enter Phone Number" },
         }
+    },
+    isAdmin: {
+        type: DataTypes.BOOLEAN,
+        defaultValue:false
     }
 });
 
-//User.sync().then((res)=>console.log(res)).catch(err=>console.log(err));;
+User.hasMany(Voucher, {
+    foreignKey: 'userId',
+    constraints: false,
+    scope: {
+      commentableType: 'user'
+    }
+});
+  
+
+module.exports = User;
+

@@ -21,7 +21,7 @@ const addUser = async (req, res) => {
 const findUsers = async (req, res) => {
   try {
     const users = await User.findAll();
-    await res.json(users);
+    await res.send(users);
   } catch (err) {
     await res.send({ Error: err });
   }

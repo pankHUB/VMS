@@ -8,6 +8,7 @@ const addExcelVoucher = async (req, res) => {
 
   try {
     const xlFile = root + "/xlsxFiles/" + req.file.filename;
+    const {userId }= req.body;
     console.log("file", req.file);
     const excelData = xlsx.readFile(xlFile);
     const sheets = excelData.SheetNames;
@@ -20,7 +21,8 @@ const addExcelVoucher = async (req, res) => {
     }
     data.forEach(async(value)=>{
       const response = await Vaucher.create({
-        ...value
+        ...value,
+        userId
       })
     })
     console.log(data);

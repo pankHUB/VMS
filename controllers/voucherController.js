@@ -5,9 +5,9 @@ const root = path.dirname(require.main.filename);
 
 
 const addExcelVoucher = async (req, res) => {
-  const xlFile = root + "/xlsxFiles/" + req.file.filename;
 
   try {
+    const xlFile = root + "/xlsxFiles/" + req.file.filename;
     console.log("file", req.file);
     const excelData = xlsx.readFile(xlFile);
     const sheets = excelData.SheetNames;
@@ -24,7 +24,7 @@ const addExcelVoucher = async (req, res) => {
       })
     })
     console.log(data);
-    res.json({ status: "sucess", data });
+    res.json({ status: "success", data, message:"Created" });
   } catch (err) {
     console.log(`Error : ${err}`);
     res.json({ Error: err });
@@ -62,9 +62,10 @@ const findVouchers = async (req, res) => {
 };
 
 const deleteVoucher = async (req, res) => {
+  const {vaucherId} = req.params;
   try {
     const response = await Vaucher.destroy({
-      where: { vaucherId: req.body.voucherId },
+      where: { vaucherId },
     });
 
     res.json(response);

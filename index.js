@@ -41,7 +41,7 @@ app.listen(4500, async()=>{
         // const u = await User.sync();
         // const v = await Vaucher.sync();
         console.log(`Database connection has been established successfully.` );
-        console.log(`Server start at 3000`);
+        console.log(`Server start at 4500`);
     }catch(error){
         console.error('Error :', error);
     }
